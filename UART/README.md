@@ -4,7 +4,7 @@
 
 1. UART 포트 선택하고 Enable 한다. ⇒ Asynchronous
 
-![Untitled-2.png](02%20UART%20ff70d19d15034e2b83bfa568cc4ba5e2/Untitled-2.png)
+![Untitled-2.png](https://user-images.githubusercontent.com/38068303/130161734-189d6bf4-9dda-496c-917d-fe7c01119ed7.png)
 
 1. UART Parameter values
 
