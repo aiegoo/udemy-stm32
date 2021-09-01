@@ -20,3 +20,19 @@
 - MCU Type is in the stm32h7xx.h header file list
 
 <img src="../images/preprocessor.png"></img>
+
+### 5. Some file copy to my project folder
+
+- lib > Cube_STM32H750 > Core > Inc
+    - stm32h7xx_hal-conf.h
+    - stm32h7xx_it.h
+
+- lib > Cube_STM32H750 > Core > Src
+    - stm32h7xx_hal_msp.c
+    - stm32h7xx_it.c
+    - system_stm32h7xx.c
+
+<img src="../images/file_copy_to_myproject.png"></img>
+
+
+
