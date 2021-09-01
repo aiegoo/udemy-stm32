@@ -2,13 +2,18 @@
 
 ## 1. Create new Project
 
-- File > New > STM32 Project   
+#### - File > New > STM32 Project 
 
-<img src="images/STM32_Project_New_Project.png"></img>
+<img src="images/STM32_Project_New_Project.png" width=320></img>
 
-- Beginning folder structure
+#### - Beginning folder structure
 
 <img src="images/folder_structure.png"></img>
+
+#### - Customize folder structure
+
+<img src="images/custom_folder_structure.png"></img>
+
 
 
 
