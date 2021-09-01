@@ -14,6 +14,10 @@
 
 <img src="images/custom_folder_structure.png"></img>
 
+#### - Project Path setup
 
+- Proejct > Properties > C/C++ Build > Settings > MCU GCC Compiler > Include paths
+
+<img src="images/include_paths.png"></img>
 
 
