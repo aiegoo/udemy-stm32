@@ -15,3 +15,8 @@
 
 <img src="../images/led_include_path.png"></img>
 
+#### 4. Add MCU type into preprocess
+
+- MCU Type is in the stm32h7xx.h header file list
+
+<img src="../images/preprocessor.png"></img>
