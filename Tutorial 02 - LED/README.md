@@ -19,7 +19,7 @@
 
 - MCU Type is in the stm32h7xx.h header file list
 
-<img src="../images/preprocessor.png"></img>
+<img src="../images/preprocessor02.png"></img>
 
 ### 5. Some file copy to my project folder
 
