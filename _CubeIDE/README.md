@@ -2,6 +2,7 @@
 
 ## 1. Create new Project
 
-- File > New > STM32 Project
-<img src=""></img>
+- File > New > STM32 Project   
+
+<img src="images/STM32_Project_New_Project.png"></img>
 
