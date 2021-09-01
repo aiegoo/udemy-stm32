@@ -13,5 +13,5 @@
 
 #### 3. Add include path
 
-
+<img src="../images/led_include_path.png"></img>
 
