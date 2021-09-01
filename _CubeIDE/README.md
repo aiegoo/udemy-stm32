@@ -14,10 +14,13 @@
 
 <img src="images/custom_folder_structure.png"></img>
 
-#### - Project Path setup
+#### - Project Path settings
 
 - Proejct > Properties > C/C++ Build > Settings > MCU GCC Compiler > Include paths
 
 <img src="images/include_paths.png"></img>
 
+- Linker Script Path change
+
+<img src="images/linkderscript_path.png"></img>
 
