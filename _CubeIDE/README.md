@@ -134,3 +134,14 @@ void hwInit(void)
 #endif /* SRC_COMMON_DEF_H_ */
 
 ```
+
+#### - Debug Configuration
+
+- Run > Debug Configurations...
+
+    - J-Link Pro Debugging Setting
+
+<img src="images/debug_configurations.png" width=600></img>
+
+
+
