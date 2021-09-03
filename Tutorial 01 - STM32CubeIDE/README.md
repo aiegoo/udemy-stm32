@@ -22,6 +22,9 @@
 
 - Linker Script Path change
 
+    - Proejct > Properties > C/C++ Build > Settings > MCU GCC Linker > General
+
+
 <img src="../images/linkderscript_path.png"></img>
 
 #### - Each File code
