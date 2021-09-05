@@ -1,0 +1,8 @@
+uart.c:20:6:uartInit	16	static
+uart.c:39:9:uartAvailable	16	static
+uart.c:49:9:uartRead	16	static
+uart.c:63:6:uartDataIn	16	static
+uart.c:68:11:uartWrite	24	static
+uart.c:82:10:uartPrintf	280	static
+uart.c:99:10:uartGetBaud	16	static
+uart.c:108:6:HAL_UART_RxCpltCallback	16	static
