@@ -1,0 +1,2 @@
+bsp.c:12:6:delay	16	static
+bsp.c:17:10:millis	8	static
