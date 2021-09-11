@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -51,7 +52,6 @@ uint8_t rxData;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
-// Add "-u_printf_float" to MCU GCC Linker > Miscellaneous
 int _write(int file, char *ptr, int len)
 {
   HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, 10);
@@ -94,24 +94,22 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_UART_Receive_IT(&huart1, &rxData, 1); // uart interrupt receive start
+
+  HAL_TIM_Base_Start_IT(&htim14);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  uint8_t count = 0;
-  float f = 0.00;
-
+  uint8_t count;
   while (1)
   {
-    printf("Count : %d, %f\n\r", count++, f);
-    delay_ms(500);
-    f += 0.001;
-
+    printf("Count : %d\n\r", count++);
+    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -177,6 +175,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   {
     HAL_UART_Receive_IT(&huart1, &rxData, 1);
     HAL_UART_Transmit(&huart1, &rxData, 1, 10);
+  }
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM14)
+  {
+    HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_14);
   }
 }
 
