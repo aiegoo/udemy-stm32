@@ -17,6 +17,6 @@ uint32_t millis(void);
 uint32_t micros(void);
 void delay_ms(uint32_t ms);
 void delay_us(uint32_t us);
-
+uint32_t DWT_Delay_Init(void);
 
 #endif /* INCLUDE_UTILITY_UTILITY_H_ */

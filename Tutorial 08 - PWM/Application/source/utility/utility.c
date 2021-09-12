@@ -15,7 +15,7 @@ uint32_t millis(void)
 
 uint32_t micros(void)
 {
-  return 0;
+  return (HAL_RCC_GetHCLKFreq() / (HAL_RCC_GetHCLKFreq() / 1000000));
 }
 
 void delay_ms(uint32_t ms)
@@ -26,5 +26,3 @@ void delay_ms(uint32_t ms)
 void delay_us(uint32_t us)
 {
 }
-
-

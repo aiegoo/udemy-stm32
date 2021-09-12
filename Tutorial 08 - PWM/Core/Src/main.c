@@ -45,10 +45,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t rxData;
 
-uint16_t ccr1 = 10000;
-uint16_t ccr2 = 10000;
+uint8_t rxData;
 
 /* USER CODE END PV */
 
@@ -97,7 +95,10 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM4_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
+//  DWT_Delay_Init();
 
   HAL_UART_Receive_IT(&huart1, &rxData, 1); // uart interrupt receive start
 
@@ -110,19 +111,27 @@ int main(void)
   HAL_TIM_PWM_Start_IT(&htim4, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start_IT(&htim4, TIM_CHANNEL_2);
 
+  // Servo MOTOR PWM : 2.4ms (2400us)
+  HAL_TIM_Base_Start(&htim3);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
-
   bool ccr1bool = true;
   bool ccr2bool = false;
+  bool mccrbool = true;
+
+  uint16_t ccr1 = 10000;
+  uint16_t ccr2 = 10000;
+  uint16_t mccr = 1500;
 
   while (1)
   {
+    // LED Blinking PWM control ----------------------------------
 //    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, ccr1);
     TIM4->CCR1 = ccr1;
 //    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, ccr2);
@@ -148,13 +157,28 @@ int main(void)
     else
       ccr2 -= 100;
 
-printf("%d : ccr1: %d / ccr2: %d\n\r", TIM4->ARR, ccr1, ccr2);
+//printf("%d : ccr1: %d / ccr2: %d\n\r", TIM4->ARR, ccr1, ccr2);
 
     delay_ms(4);
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    // Servo MOTOR PWM control -----------------------------------
+    // timer channel 1 control : 800 ~ 2300 us
+    TIM3->CCR1 = mccr;
+
+    if (mccr > 2300)
+      mccrbool = false;
+    if (mccr < 800)
+      mccrbool = true;
+
+    if (mccrbool)
+      mccr += 2;
+    else
+      mccr -= 2;
+
   }
   /* USER CODE END 3 */
 }
