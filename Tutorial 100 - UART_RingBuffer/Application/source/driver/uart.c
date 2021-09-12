@@ -38,27 +38,35 @@ bool uartOpen(uint8_t ch, uint32_t baud)
   switch (ch)
   {
     case DEF_UART1:
-      qbufferCreate(&qbuffer[DEF_UART1], (uint8_t *)&rx_buf1[0], 256);
+      qbufferCreate(&qbuffer[ch], &rx_buf1[0], 256);
 
       is_open[ch] = true;
       ret = true;
 
-      if (HAL_UART_Receive_IT(&huart1, (uint8_t *)&rx_data[DEF_UART1], 1) != HAL_OK)
+//      if (HAL_UART_Receive_IT(&huart1, (uint8_t *)&rx_data[ch], 1) != HAL_OK)
+      if (HAL_UART_Receive_DMA(&huart1, (uint8_t *)&rx_buf1[0], 256) != HAL_OK)
       {
         ret = false;
       }
+
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+      qbuffer[ch].out = qbuffer[ch].in;
       break;
 
     case DEF_UART2:
-      qbufferCreate(&qbuffer[DEF_UART2], (uint8_t *)&rx_buf2[0], 256);
+      qbufferCreate(&qbuffer[ch], &rx_buf2[0], 256);
 
       is_open[ch] = true;
       ret = true;
 
-      if (HAL_UART_Receive_IT(&huart2, (uint8_t *)&rx_data[DEF_UART2], 1) != HAL_OK)
+//      if (HAL_UART_Receive_IT(&huart2, (uint8_t *)&rx_data[ch], 1) != HAL_OK)
+      if (HAL_UART_Receive_DMA(&huart2, (uint8_t *)&rx_buf2[0], 256) != HAL_OK)
       {
         ret = false;
       }
+
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart2.hdmarx);
+      qbuffer[ch].out = qbuffer[ch].in;
       break;
   }
 
@@ -72,11 +80,13 @@ uint32_t uartAvailable(uint8_t ch)
   switch (ch)
   {
     case DEF_UART1:
-      ret = qbufferAvailable(&qbuffer[DEF_UART1]);
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+      ret = qbufferAvailable(&qbuffer[ch]);
       break;
 
     case DEF_UART2:
-      ret = qbufferAvailable(&qbuffer[DEF_UART2]);
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart2.hdmarx);
+      ret = qbufferAvailable(&qbuffer[ch]);
       break;
   }
 
@@ -91,11 +101,15 @@ uint8_t uartRead(uint8_t ch)
   switch (ch)
   {
     case DEF_UART1:
-      qbufferRead(&qbuffer[DEF_UART1], &ret, 1);
+//      ret = qbufferRead(&qbuffer[DEF_UART1], &ret, 1); // uart polling rx interrupt
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart1.hdmarx);
+      ret = qbufferAvailable(&qbuffer[ch]);
       break;
 
     case DEF_UART2:
-      qbufferRead(&qbuffer[DEF_UART2], &ret, 1);
+//      ret = qbufferRead(&qbuffer[DEF_UART2], &ret, 1); // uart polling rx interrupt
+      qbuffer[ch].in = qbuffer[ch].len - __HAL_DMA_GET_COUNTER(huart2.hdmarx);
+      ret = qbufferAvailable(&qbuffer[ch]);
       break;
   }
 
@@ -152,10 +166,21 @@ uint32_t uartGetBaud(uint8_t ch)
 {
   uint32_t ret = 0;
 
+  switch (ch)
+  {
+    case DEF_UART1:
+      ret = huart1.Init.BaudRate;
+      break;
+
+    case DEF_UART2:
+      ret = huart2.Init.BaudRate;
+      break;
+  }
+
   return ret;
 }
 
-
+// uart polling interrupt rx -> tx -----------------------
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart->Instance == USART1)

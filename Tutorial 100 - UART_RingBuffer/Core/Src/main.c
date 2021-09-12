@@ -96,8 +96,6 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-
-
   uartOpen(DEF_UART1, 115200);
   uartOpen(DEF_UART2, 115200);
 
@@ -107,6 +105,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   uint32_t time;
+  uint8_t rxcount;
+  uint8_t rxdata[256];
 
   while (1)
   {
@@ -115,11 +115,21 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     // LED Blinking --------------------
-    if (HAL_GetTick() - time > 1000)
+    if (HAL_GetTick() - time > 100)
     {
       time = HAL_GetTick();
 
       HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
+
+      rxcount = uartAvailable(DEF_UART1);
+      if (rxcount > 1)
+      {
+        for (int i = 0; i < rxcount; i++)
+        {
+          rxdata[i] = uartRead(DEF_UART1);
+        }
+        uartWrite(DEF_UART1, &rxdata[0], rxcount);
+      }
     }
 
   }
