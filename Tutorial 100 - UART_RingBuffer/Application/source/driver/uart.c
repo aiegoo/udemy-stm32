@@ -17,8 +17,8 @@ static bool is_open[UART_MAX_CH];
 static qbuffer_t qbuffer[UART_MAX_CH];
 static uint8_t rx_data[UART_MAX_CH];
 
-static uint8_t rx_buf1[256];
-static uint8_t rx_buf2[256];
+static uint8_t rx_buf1[UART_RINGBUFFER_LENGTH];
+static uint8_t rx_buf2[UART_RINGBUFFER_LENGTH];
 
 
 bool uartInit(void)

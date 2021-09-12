@@ -22,7 +22,7 @@
 #define DEF_UART1         0
 #define DEF_UART2         1
 
-
+#define UART_RINGBUFFER_LENGTH    256
 
 
 
