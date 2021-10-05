@@ -1,0 +1,3 @@
+drv_mpu9250.c:23:10:drv_mpu9250_init	16	static
+drv_mpu9250.c:68:5:drv_mpu9250_write	48	dynamic
+drv_mpu9250.c:91:5:drv_mpu9250_read	32	static
