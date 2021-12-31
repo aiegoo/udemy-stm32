@@ -1,3 +1,0 @@
-bsp.c:12:6:bspInit	4	static
-bsp.c:17:6:delay	16	static
-bsp.c:22:10:millis	4	static

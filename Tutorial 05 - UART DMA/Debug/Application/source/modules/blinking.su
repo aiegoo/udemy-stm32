@@ -1,3 +1,0 @@
-blinking.c:14:6:HAL_TIM_PeriodElapsedCallback	16	static
-blinking.c:20:6:HAL_TIM_OC_DelayElapsedCallback	16	static
-blinking.c:26:6:led_Init	8	static

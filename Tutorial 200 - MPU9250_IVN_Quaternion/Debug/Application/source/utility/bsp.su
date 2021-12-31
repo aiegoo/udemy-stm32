@@ -1,4 +1,0 @@
-bsp.c:12:6:delay_ms	16	static
-bsp.c:17:10:millis	8	static
-bsp.c:23:10:drv_mpu9250_ms_get	16	static
-bsp.c:30:10:get_tick_count	16	static

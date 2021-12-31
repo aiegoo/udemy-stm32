@@ -1,7 +1,0 @@
-"./src/ap/ap.o"
-"./src/bsp/bsp.o"
-"./src/bsp/syscalls.o"
-"./src/bsp/sysmem.o"
-"./src/bsp/startup/startup_stm32h750vbtx.o"
-"./src/hw/hw.o"
-"./src/main.o"
